@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
-import { ShoppingCartProvider } from '../../context'
+import { ShoppingCartProvider } from '../../context/shoppingCartContext'
 import AppRoutes from '../../routes/AppRoutes'
 import Navbar from '../../components/Navbar'
 import { leftMenu, rightMenu } from '../../Config/constants'
