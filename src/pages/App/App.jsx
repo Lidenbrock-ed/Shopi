@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ShoppingCartProvider } from '../../context/shoppingCartContext'
 import AppRoutes from '../../routes/AppRoutes'
 import Navbar from '../../components/Navbar'
+import CheckoutSideMenu from '../../components/CheckoutSideMenu'
 import { leftMenu, rightMenu } from '../../Config/constants'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 					rightMenu={rightMenu}
 					emailUser='email@example.com'
 				/>
+				<CheckoutSideMenu />
 			</BrowserRouter>
 		</ShoppingCartProvider>
 	)
