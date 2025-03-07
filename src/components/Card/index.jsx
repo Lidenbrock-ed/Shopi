@@ -3,24 +3,23 @@ import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
 const Card = ({ category, price, title, image, description, rating }) => {
   const context = useContext(ShoppingCartContext)
-
+  const product = { category, price, title, image, description, rating }
   const showProductDetails = (productDetail) => {
     context.toggleProductDetail()
     context.setProductToShow(productDetail)
+  }
+  const addProductsToCart = (event, productData) => {
+    event.stopPropagation()
+    context.setCartProducts([...context.cartProducts, productData])
+    context.openCheckoutSideMenu()
+    context.setCount(context.count + 1)
   }
 
   return (
     <article
       className="bg-white cursor-pointer w-56 h-80 shadow-lg rounded-lg p-4"
       onClick={() => {
-        showProductDetails({
-          category,
-          price,
-          title,
-          image,
-          description,
-          rating,
-        })
+        showProductDetails(product)
       }}
     >
       <figure className="relative mb-2 w-full h-3/5 ">
@@ -33,10 +32,10 @@ const Card = ({ category, price, title, image, description, rating }) => {
           alt={title}
         />
         <button
-          className="absolute top-0 right-0 flex justify-center items-center bg-black/80 text-white w-6 h-6 rounded-full m-2 p-3"
+          className="absolute top-0 right-0 flex justify-center items-center bg-black/80 text-white w-6 h-6 rounded-full m-2 p-3 cursor-pointer"
           onClick={(event) => {
             event.stopPropagation()
-            context.setCount(context.count + 1)
+            addProductsToCart(event, product)
           }}
         >
           +
