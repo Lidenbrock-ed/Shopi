@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { FaCirclePlus } from 'react-icons/fa6'
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
 const Card = ({ category, price, title, image, description, rating }) => {
@@ -23,7 +24,7 @@ const Card = ({ category, price, title, image, description, rating }) => {
         })
       }}
     >
-      <figure className="relative mb-2 w-full h-3/5 ">
+      <figure className="relative mb-2 w-full h-3/5">
         <span className="absolute bottom-0 left-0 bg-black/80 rounded-lg text-white text-xs m-2 px-3 py-0.5 capitalize">
           {category}
         </span>
@@ -32,15 +33,13 @@ const Card = ({ category, price, title, image, description, rating }) => {
           src={image ? image : ""}
           alt={title}
         />
-        <button
-          className="absolute top-0 right-0 flex justify-center items-center bg-black/80 text-white w-6 h-6 rounded-full m-2 p-3"
+        <FaCirclePlus
+          className="absolute top-0 right-0 w-6 h-6 text-black"
           onClick={(event) => {
             event.stopPropagation()
             context.setCount(context.count + 1)
           }}
-        >
-          +
-        </button>
+        />
       </figure>
       <p className="flex flex-col">
         <span className="text-lg text-end font-medium w-full">${price}</span>
