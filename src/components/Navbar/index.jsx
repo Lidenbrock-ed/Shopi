@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { NavLink } from "react-router-dom"
+import { FaShoppingCart } from "react-icons/fa"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
 const Navbar = ({leftMenu, rightMenu, emailUser }) => {
@@ -53,8 +54,9 @@ const Navbar = ({leftMenu, rightMenu, emailUser }) => {
             )
           })
         }
-      <li>
-        🛒{context.count}
+      <li className="flex items-center">
+        <FaShoppingCart className="w-5 h-5 mr-1" />
+        {context.count}
       </li>
     </ul>
     </nav>

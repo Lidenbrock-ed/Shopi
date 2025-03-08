@@ -1,4 +1,6 @@
 import { useContext } from "react"
+import { IoCloseCircle } from "react-icons/io5"
+import { FaStar } from "react-icons/fa6"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
 const ProductDetail = () => {
@@ -9,14 +11,12 @@ const ProductDetail = () => {
         context.isProductDetailOpen ? "flex" : "hidden"
       } h-[calc(100vh-68px)] w-[360px] top-[68px] flex-col fixed right-0 border border-black rounded-lg bg-white`}
     >
-      <div className="flex justify-between items-center px-6 py-5 ">
+      <div className="flex justify-between items-center px-6 py-5">
         <h2 className="font-medium text-xl">Details</h2>
-        <button
-          className="bg-black/80 text-white w-6 h-6 rounded-full m-1 cursor-pointer text-xs"
+        <IoCloseCircle
+          className="text-black w-6 h-6 m-1 cursor-pointer"
           onClick={() => context.toggleProductDetail()}
-        >
-          X
-        </button>
+        />
       </div>
       <figure className="px-6 h-60">
         <img
@@ -32,8 +32,9 @@ const ProductDetail = () => {
         <span className="font-medium text-2xl">
           ${context.productToShow?.price}
         </span>
-        <span className="font-medium text-lg">
-          {context.productToShow?.rating?.rate}⭐
+        <span className="flex items-center font-medium text-lg">
+          {context.productToShow?.rating?.rate}
+          <FaStar className="mx-1 text-yellow-300 w-6 h-6" />
         </span>
       </p>
       <p className="flex flex-col px-6">
