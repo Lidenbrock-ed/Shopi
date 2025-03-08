@@ -1,3 +1,5 @@
+import { IoCloseCircle } from "react-icons/io5"
+
 const OrderCard = (props) => {
   const {
     title,
@@ -18,11 +20,9 @@ const OrderCard = (props) => {
         <p className="text-md font-medium">
           ${price}
         </p>
-        <button
-          className="bg-black/80 text-white w-4 h-4 rounded-full cursor-pointer text-xs mx-1"
-        >
-          X
-        </button>
+        <IoCloseCircle
+          className="text-black w-6 h-6 cursor-pointer mx-1"
+        />
       </div>
     </div>
   )
