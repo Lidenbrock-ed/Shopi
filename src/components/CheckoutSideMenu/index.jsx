@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { IoCloseCircle } from "react-icons/io5"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 import OrderCard from '../OrderCard/'
 
@@ -14,18 +15,17 @@ const CheckoutSideMenu = () => {
         <h2 className="font-medium text-xl">
           My Order
         </h2>
-        <button
-          className="bg-black/80 text-white w-6 h-6 rounded-full m-1 cursor-pointer text-xs"
+        <IoCloseCircle
+          className="text-black w-6 h-6 m-1 cursor-pointer"
           onClick={() => context.closeCheckoutSideMenu()}
-        >
-          X
-        </button>
+        />
       </div>
       <div className="px-6 overflow-auto">
         {
-          context.cartProducts.map( product => {
+          context.cartProducts.map( (product, index) => {
             return <OrderCard 
-              key={product.id}
+              key={index}
+              id={product.id}
               title={product.title}
               imageUrl={product.image}
               price={product.price}
