@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { IoCloseCircle } from "react-icons/io5"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 import OrderCard from '../OrderCard/'
+import { totalPrice } from "../../utils"
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
@@ -42,6 +43,12 @@ const CheckoutSideMenu = () => {
             />
           })
         }
+      </div>
+      <div className="px-6 absolute bottom-0 rounded-b-lg bg-white w-full h-15">
+        <p className="flex justify-between items-center h-full text-xl font-medium">
+          <span>Total:</span>
+          <span>${totalPrice(context.cartProducts)}</span>
+        </p>
       </div>
     </aside>
   )
