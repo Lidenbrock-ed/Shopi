@@ -15,7 +15,7 @@ const ProductDetail = () => {
         <h2 className="font-medium text-xl">Details</h2>
         <IoCloseCircle
           className="text-black w-6 h-6 m-1 cursor-pointer"
-          onClick={() => context.toggleProductDetail()}
+          onClick={() => context.closeProductDetail()}
         />
       </div>
       <figure className="px-6 h-60">

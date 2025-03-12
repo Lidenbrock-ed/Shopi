@@ -8,7 +8,8 @@ export const ShoppingCartProvider = ({ children }) => {
   // Product Detail - Show Product
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
   const [productToShow, setProductToShow] = useState({})
-  const toggleProductDetail = () => setIsProductDetailOpen(!isProductDetailOpen)
+  const openProductDetail = () => setIsProductDetailOpen(true)
+  const closeProductDetail = () => setIsProductDetailOpen(false)
   //Shopping Cart - Add products to cart
   const [cartProducts, setCartProducts] = useState([])
   //shopping Cart - Show Cart
@@ -22,7 +23,8 @@ export const ShoppingCartProvider = ({ children }) => {
         count,
         setCount,
         isProductDetailOpen,
-        toggleProductDetail,
+        openProductDetail,
+        closeProductDetail,
         productToShow,
         setProductToShow,
         cartProducts,
