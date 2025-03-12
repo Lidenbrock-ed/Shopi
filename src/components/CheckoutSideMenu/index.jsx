@@ -5,6 +5,15 @@ import OrderCard from '../OrderCard/'
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
+
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter( product => {
+      return product.id !== id
+    })
+    context.setCartProducts(filteredProducts)
+    context.setCount(context.count - 1)
+  }
+
   return (
     <aside
       className={`${
@@ -29,6 +38,7 @@ const CheckoutSideMenu = () => {
               title={product.title}
               imageUrl={product.image}
               price={product.price}
+              handleDelete={handleDelete}
             />
           })
         }

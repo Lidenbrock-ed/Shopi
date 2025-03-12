@@ -2,9 +2,11 @@ import { IoCloseCircle } from "react-icons/io5"
 
 const OrderCard = (props) => {
   const {
+    id,
     title,
     imageUrl, 
-    price
+    price,
+    handleDelete
   } = props
   return (
     <div className="flex justify-between items-center shadow-lg rounded-lg p-2 mb-2 overflow-auto">
@@ -22,6 +24,7 @@ const OrderCard = (props) => {
         </p>
         <IoCloseCircle
           className="text-black w-6 h-6 cursor-pointer mx-1"
+          onClick={() => handleDelete(id)}
         />
       </div>
     </div>
