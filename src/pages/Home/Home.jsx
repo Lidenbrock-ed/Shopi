@@ -19,6 +19,7 @@ function Home () {
 						items?.map( item => {
 							return <Card 
 								key={item.id}
+								id={item.id}
 								category={item.category}
 								price={item.price}
 								title={item.title}

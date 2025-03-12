@@ -1,27 +1,49 @@
 import { useContext } from "react"
 import { FaCirclePlus } from 'react-icons/fa6'
+import { FaCheckCircle } from "react-icons/fa"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
-const Card = ({ category, price, title, image, description, rating }) => {
+const Card = ({ id, category, price, title, image, description, rating }) => {
   const context = useContext(ShoppingCartContext)
-
+  const product = { id, category, price, title, image, description, rating }
   const showProductDetails = (productDetail) => {
     context.toggleProductDetail()
     context.setProductToShow(productDetail)
   }
+  const addProductsToCart = (event, productData) => {
+    event.stopPropagation()
+    context.setCartProducts([...context.cartProducts, productData])
+    context.openCheckoutSideMenu()
+    context.setCount(context.count + 1)
+  }
+
+const renderIcon = (id) => {
+  const isInCart = context.cartProducts.filter( product => product.id === id).length > 0
+  if(isInCart) {
+    return (
+      <FaCheckCircle
+        onClick={(event) => event.stopPropagation()}
+        className="absolute top-0 right-0 w-6 h-6 text-green-400"
+      />
+    )
+  } else {
+    return (
+      <FaCirclePlus
+        className="absolute top-0 right-0 w-6 h-6 text-black"
+        onClick={(event) => {
+          event.stopPropagation()
+          addProductsToCart(event, product)
+        }}
+      />
+    )
+  }
+}
 
   return (
     <article
       className="bg-white cursor-pointer w-56 h-80 shadow-lg rounded-lg p-4"
       onClick={() => {
-        showProductDetails({
-          category,
-          price,
-          title,
-          image,
-          description,
-          rating,
-        })
+        showProductDetails(product)
       }}
     >
       <figure className="relative mb-2 w-full h-3/5">
@@ -33,13 +55,7 @@ const Card = ({ category, price, title, image, description, rating }) => {
           src={image ? image : ""}
           alt={title}
         />
-        <FaCirclePlus
-          className="absolute top-0 right-0 w-6 h-6 text-black"
-          onClick={(event) => {
-            event.stopPropagation()
-            context.setCount(context.count + 1)
-          }}
-        />
+        {renderIcon(product.id)}
       </figure>
       <p className="flex flex-col">
         <span className="text-lg text-end font-medium w-full">${price}</span>
