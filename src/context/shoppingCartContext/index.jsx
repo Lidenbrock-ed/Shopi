@@ -1,5 +1,6 @@
-import { createContext, useState } from "react"
-
+import { createContext, useEffect, useState } from "react"
+import { useFetch } from "../../hooks/common/useFetch"
+import { ENDPOINTS } from "../../config/api"
 // eslint-disable-next-line react-refresh/only-export-components
 export const ShoppingCartContext = createContext()
 
@@ -18,6 +19,27 @@ export const ShoppingCartProvider = ({ children }) => {
   const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false)
   //Shopping Cart - Order
   const [order, setOrder] = useState([])
+  //Get Products
+  const { 
+		data: items,
+		loading,
+    setItems
+	} = useFetch(ENDPOINTS.PRODUCTS, [])
+  const [filteredItems, setFilteredItems] = useState(null)
+   // Search Bar
+  const [searchByTitle, setSearchByTitle] = useState(null)
+
+  const filteredItemsBySearchBar = (items, searchByTitle) => {
+    return items?.filter(item => item.title?.toLowerCase().includes(searchByTitle.toLowerCase()))
+  }
+
+  useEffect( () => {
+    if(searchByTitle){
+      setFilteredItems( filteredItemsBySearchBar( items, searchByTitle ) )
+    }
+  }, [items, searchByTitle])
+
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -34,7 +56,13 @@ export const ShoppingCartProvider = ({ children }) => {
         openCheckoutSideMenu,
         closeCheckoutSideMenu,
         order,
-        setOrder
+        setOrder,
+        items,
+        loading,
+        setItems,
+        searchByTitle,
+        setSearchByTitle,
+        filteredItems
       }}
     >
       {children}
