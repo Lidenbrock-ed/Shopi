@@ -9,3 +9,25 @@ export const totalPrice = (products) => {
   sum = sum.toFixed(2)
   return sum
 }
+
+/**
+ * Returns current date and time in a formatted string
+ * Format: YYYY-MM-DD HH:mm:ss
+ * @returns {string} Formatted date and time
+ */
+export const dateTime = () => {
+  const today = new Date();
+  
+  // Get date components
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  
+  // Get time components
+  const hours = String(today.getHours()).padStart(2, '0');
+  const minutes = String(today.getMinutes()).padStart(2, '0');
+  const seconds = String(today.getSeconds()).padStart(2, '0');
+  
+  // Create formatted string
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
