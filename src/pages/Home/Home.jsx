@@ -1,22 +1,19 @@
+import { useContext } from "react"
 import Layout from "../../components/Layout"
 import Card from "../../components/Card"
 import ProductDetail from "../../components/ProductDetail"
-import { useFetch } from "../../hooks/common/useFetch"
-import { ENDPOINTS } from "../../config/api"
+import { ShoppingCartContext } from "../../context/shoppingCartContext"
 
 function Home () {
-	const { 
-		data: items,
-		loading,
-	 } = useFetch(ENDPOINTS.PRODUCTS, [])
+	const context = useContext(ShoppingCartContext)
 	return (
 		<Layout>
 			<div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
 				{ 
-					(loading)?
+					(context.loading)?
 						<div> Loading...</div>
 					:
-						items?.map( item => {
+						context.items?.map( item => {
 							return <Card 
 								key={item.id}
 								id={item.id}
