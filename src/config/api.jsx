@@ -1,6 +1,7 @@
 // API Base URLs
 export const URL = {
-  PRODUCTION: 'https://fakestoreapi.com'
+  PRODUCTION: import.meta.env.VITE_API_URL_PROD,
+  DEVELOP: import.meta.env.VITE_API_URL_DEV
 }
 
 // API Endpoints
@@ -13,7 +14,7 @@ export const API_CONFIG = {
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 5000,
+  timeout: import.meta.env.VITE_API_TIMEOUT,
 }
 
 // API Status Codes
