@@ -31,3 +31,15 @@ export const dateTime = () => {
   // Create formatted string
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+/**
+ * Generates a random rating number between min and max with one decimal place
+ * @param {number} [min=1] - The minimum value (inclusive)
+ * @param {number} [max=5] - The maximum value (inclusive)
+ * @returns {number} A random number between min and max with one decimal place
+ * @example
+ * getRandomRating()    // returns 3.7
+ * getRandomRating(2,4) // returns 2.9
+ */
+export const getRandomRating = (min = 1, max = 5) => {
+  return Number((Math.random() * (max - min) + min).toFixed(1));
+}
