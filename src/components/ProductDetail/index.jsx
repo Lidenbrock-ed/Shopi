@@ -18,13 +18,13 @@ const ProductDetail = () => {
           onClick={() => context.closeProductDetail()}
         />
       </div>
-      <figure className="px-6 h-60">
+      <figure className="px-6 h-70">
         <img
-          className="w-full h-full rounded-lg object-contain"
+          className="w-full h-full rounded-lg object-cover"
           src={context.productToShow?.image}
           alt={context.productToShow?.title}
         />
-        <span className="absolute bottom-[calc(100vh-380px)] left-6 bg-black/80 rounded-lg text-white text-xs px-3 py-0.5 capitalize">
+        <span className="absolute bottom-[calc(100vh-415px)] left-10 bg-black/80 rounded-lg text-white text-xs px-3 py-0.5 capitalize">
           {context.productToShow?.category}
         </span>
       </figure>
@@ -41,7 +41,7 @@ const ProductDetail = () => {
         <span className="font-medium text-lg my-2">
           {context.productToShow?.title}
         </span>
-        <span className="font-ligth text-sm">
+        <span className="font-light text-sm">
           {context.productToShow?.description}
         </span>
       </p>

@@ -23,13 +23,13 @@ const renderIcon = (id) => {
     return (
       <FaCheckCircle
         onClick={(event) => event.stopPropagation()}
-        className="absolute top-0 right-0 w-6 h-6 text-green-400"
+        className="absolute top-2 right-2 w-6 h-6 text-green-400"
       />
     )
   } else {
     return (
       <FaCirclePlus
-        className="absolute top-0 right-0 w-6 h-6 text-black"
+        className="absolute top-2 right-2 w-6 h-6 text-white"
         onClick={(event) => {
           event.stopPropagation()
           addProductsToCart(event, product)
@@ -51,7 +51,7 @@ const renderIcon = (id) => {
           {category}
         </span>
         <img
-          className="w-full h-full object-contain rounded-lg"
+          className="w-full h-full object-cover rounded-lg"
           src={image ? image : ""}
           alt={title}
         />

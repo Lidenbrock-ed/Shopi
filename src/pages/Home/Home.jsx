@@ -3,36 +3,40 @@ import Layout from "../../components/Layout"
 import Card from "../../components/Card"
 import ProductDetail from "../../components/ProductDetail"
 import { ShoppingCartContext } from "../../context/shoppingCartContext"
-
+import { getRandomRating } from "../../utils"
 function Home () {
 	const context = useContext(ShoppingCartContext)
 	
 	const renderView = () => {
-		const renderFilteredItems = context.filteredItems?.map( item => (
-			<Card 
+		const renderFilteredItems = context.filteredItems?.map( product => {
+			const rating = { rate: getRandomRating()}
+			let item = {...product, rating: rating}
+			return <Card 
 				key={item.id}
 				id={item.id}
-				category={item.category}
+				category={item.category.name}
 				price={item.price}
 				title={item.title}
-				image={item.image}
+				image={item.images?.[0]}
 				description={item.description}
 				rating={item.rating}
 			/>
-		))
+		})
 
-		const renderAllItems = context.items?.map( item => (
-			<Card 
+		const renderAllItems = context.items?.map( product => {
+			const rating = { rate: getRandomRating()}
+			let item = {...product, rating: rating}
+			return <Card 
 				key={item.id}
 				id={item.id}
-				category={item.category}
+				category={item.category.name}
 				price={item.price}
 				title={item.title}
-				image={item.image}
+				image={item.images?.[0]}
 				description={item.description}
 				rating={item.rating}
 			/>
-		))
+	})
 		
 		if(context.loading){
 			return (
