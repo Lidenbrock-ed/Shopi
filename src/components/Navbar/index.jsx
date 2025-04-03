@@ -10,8 +10,9 @@ const Navbar = ({leftMenu, rightMenu, emailUser }) => {
     <nav className="flex justify-between items-center z-10 fixed top-0 w-full py-5 px-8 text-sm font-light bg-white">
       <ul className="flex items-center gap-3">
       <li className="font-semibold text-lg">
-          <NavLink
-            to="/">
+        <NavLink
+          to={"/"}
+        >
           Shopi
         </NavLink>
       </li>
@@ -25,6 +26,7 @@ const Navbar = ({leftMenu, rightMenu, emailUser }) => {
                 <NavLink
                   to={menuItem.path}
                   className={ ({ isActive }) => isActive? activeStyle : '' }
+                  onClick={ () => context.setSearchByCategory( menuItem.searchValue.toLowerCase() ) }
                 >
                   {menuItem.name}
                 </NavLink>
