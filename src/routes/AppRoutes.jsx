@@ -13,6 +13,22 @@ const AppRoutes = () => {
 			element: <Home />,
 		},
 		{
+			path: '/clothes',
+			element: <Home />,
+		},
+		{
+			path: '/clothes',
+			element: <Home />,
+		},
+		{
+			path: '/electronics',
+			element: <Home />,
+		},
+		{
+			path: '/jewelery',
+			element: <Home />,
+		},
+		{
 			path: '/my-account',
 			element: <MyAccount />,
 		},

@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react"
 import { useFetch } from "../../hooks/common/useFetch"
 import { ENDPOINTS } from "../../config/api"
+import { getRandomRating } from "../../utils"
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const ShoppingCartContext = createContext()
 
@@ -25,19 +27,76 @@ export const ShoppingCartProvider = ({ children }) => {
 		loading,
     setItems
 	} = useFetch(ENDPOINTS.PRODUCTS, [])
+  const allItems = items?.map( product => {
+    const rating = { rate: getRandomRating()}
+    return {
+      ...product,
+      rating: rating,
+      images: product.image ? product.image : product.images?.[0],
+      category: (product.category?.name) ? product.category.name : product.category	
+    }
+  })
   const [filteredItems, setFilteredItems] = useState(null)
    // Search Bar
   const [searchByTitle, setSearchByTitle] = useState(null)
 
   const filteredItemsBySearchBar = (items, searchByTitle) => {
-    return items?.filter(item => item.title?.toLowerCase().includes(searchByTitle.toLowerCase()))
+    return items?.filter(item => item.title?.toLowerCase().includes(searchByTitle))
+  }
+  // Get products by Category
+  const [searchByCategory, setSearchByCategory] = useState(null)
+
+  const filteredItemsByCategory= (items, searchByCategory) => {
+    return items?.filter(item => item.category.toLowerCase().includes(searchByCategory))
+  } 
+
+  const filterBy = ({searchType, items, searchByTitle, searchByCategory}) => {
+    if (searchType === 'BY_TITLE'){
+      return filteredItemsBySearchBar(items, searchByTitle)
+    }
+    if (searchType === 'BY_CATEGORY'){
+      return filteredItemsByCategory(items, searchByCategory)
+    }
+    if (searchType === 'BY_TITLE_AND_CATEGORY'){
+      return filteredItemsByCategory(items, searchByCategory).filter(item => item.title?.toLowerCase().includes(searchByTitle))
+    }
+    if(!searchType){
+      return allItems
+    }
   }
 
   useEffect( () => {
-    if(searchByTitle){
-      setFilteredItems( filteredItemsBySearchBar( items, searchByTitle ) )
+    if(searchByTitle && searchByCategory){ 
+      setFilteredItems( filterBy({
+        searchType:'BY_TITLE_AND_CATEGORY',
+        items: allItems,
+        searchByTitle: searchByTitle.toLowerCase(),
+        searchByCategory: searchByCategory.toLowerCase()
+        }))
+      return
     }
-  }, [items, searchByTitle])
+  if(searchByTitle && !searchByCategory){ 
+    setFilteredItems( filterBy({
+      searchType:'BY_TITLE',
+      items: allItems,
+      searchByTitle: searchByTitle.toLowerCase(),
+      })) 
+    return
+  }
+  if(searchByCategory && !searchByTitle){
+    setFilteredItems( filterBy({
+      searchType:'BY_CATEGORY',
+      items: allItems,
+      searchByCategory: searchByCategory.toLowerCase()
+      }))
+    return
+  }
+  if(!searchByCategory && !searchByTitle){
+    setFilteredItems( filterBy({
+      searchType:null
+      }))
+  }
+  }, [items, searchByTitle, searchByCategory])
 
 
   return (
@@ -62,7 +121,10 @@ export const ShoppingCartProvider = ({ children }) => {
         setItems,
         searchByTitle,
         setSearchByTitle,
-        filteredItems
+        filteredItems,
+        searchByCategory,
+        setSearchByCategory,
+        filteredItemsByCategory
       }}
     >
       {children}

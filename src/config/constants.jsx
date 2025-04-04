@@ -1,27 +1,23 @@
 export const leftMenu = [
 	{
 		path: '/',
-		name: 'All'
-	},
-	{
-		path: '/clothes',
-		name: 'Clothes'
+		name: 'All',
+		searchValue: null
 	},
 	{
 		path: '/electronics',
-		name: 'Electronics'
+		name: 'Electronics',
+		searchValue: "electronics"
 	},
 	{
-		path: '/furnitures',
-		name: 'Furnitures'
+		path: '/clothes',
+		name: "Clothes",
+		searchValue: "clothing"
 	},
 	{
-		path: '/toys',
-		name: 'Toys'
-	},
-	{
-		path: '/others',
-		name: 'Others'
+		path: '/jewelery',
+		name: 'Jewelery',
+		searchValue: 'jewelery'
 	}
 ]
 
